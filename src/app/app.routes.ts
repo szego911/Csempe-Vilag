@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { RegisterComponent } from './pages/cart/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfilComponent } from './pages/profil/profil.component';
 import { TileListComponent } from './pages/tileList/tile-list.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 export const routes: Routes = [
   {
@@ -34,11 +34,11 @@ export const routes: Routes = [
     component: ProfilComponent,
   },
   {
-    path: 'products',
-    component: ProductsListComponent,
-  },
-  {
     path: 'csempek',
     component: TileListComponent,
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
   },
 ];

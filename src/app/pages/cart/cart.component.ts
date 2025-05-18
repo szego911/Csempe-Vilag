@@ -37,8 +37,10 @@ export class CartComponent {
 
   updateQuantity(item: CartItem, change: number) {
     const newBoxCount = item.quantity + change;
-    this.cartService.updateQuantity(item.tile.id, newBoxCount);
-    this.cartItems = this.cartService.getCart();
+    if (item.tile.id) {
+      this.cartService.updateQuantity(item.tile.id, newBoxCount);
+      this.cartItems = this.cartService.getCart();
+    }
   }
 
   clearCart() {

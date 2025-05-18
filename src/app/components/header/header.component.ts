@@ -16,6 +16,7 @@ import { PrimaryButtonComponent } from '../primary-button/primary-button.compone
         <a routerLink="/csempek">Csempék</a>
         <a routerLink="/login">Bejelentkezés</a>
         <a routerLink="/profil">Profil</a>
+        <a routerLink="/admin">Admin</a>
       </div>
 
       <app-primary-button label="{{ cartLabel() }}" routerLink="/cart" />

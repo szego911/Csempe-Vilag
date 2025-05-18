@@ -1,16 +1,16 @@
-<div class="p-4">
+<div class="p-4 lg:mx-[150px]">
   <h2 class="text-2xl font-semibold mb-4">Csempék</h2>
 
   <div
-    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5"
   >
     <div
       *ngFor="let tile of tiles"
-      class="bg-white shadow-md rounded-2xl overflow-hidden cursor-pointer hover:shadow-lg transition"
+      class="bg-white shadow-md rounded-2xl overflow-hidden cursor-pointer max-w-[500px] hover:shadow-lg transition"
       (click)="openModal(tile)"
     >
       <img
-        src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=927&amp;q=80"
+        [src]="'/' + tile.imageUrl"
         alt="{{ tile.name }}"
         class="w-full h-48 object-cover"
       />

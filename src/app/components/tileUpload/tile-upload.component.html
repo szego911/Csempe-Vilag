@@ -1,0 +1,96 @@
+<form
+  [formGroup]="tileForm"
+  (ngSubmit)="onSubmit()"
+  class="grid gap-4 p-6 max-w-lg"
+>
+  <label>
+    Név:
+    <input type="text" placeholder="Név" formControlName="name" />
+  </label>
+
+  <label>
+    Ár (Ft/m²):
+    <input
+      type="number"
+      placeholder="Ár (Ft/m²)"
+      formControlName="pricePerSqm"
+    />
+  </label>
+
+  <label>
+    Színárnyalat:
+    <input
+      type="text"
+      placeholder="Színárnyalat"
+      formControlName="colorShade"
+    />
+  </label>
+
+  <label>
+    Felület:
+    <input type="text" placeholder="Felület" formControlName="surface" />
+  </label>
+
+  <label>
+    Anyag:
+    <input type="text" placeholder="Anyag" formControlName="material" />
+  </label>
+
+  <label>
+    Ajánlott felhasználás:
+    <input
+      type="text"
+      placeholder="Ajánlott felhasználás"
+      formControlName="recommendedUse"
+    />
+  </label>
+
+  <label>
+    Szélesség (cm):
+    <input
+      type="number"
+      placeholder="Szélesség (cm)"
+      formControlName="width_cm"
+    />
+  </label>
+
+  <label>
+    Mélység (cm):
+    <input
+      type="number"
+      placeholder="Mélység (cm)"
+      formControlName="depth_cm"
+    />
+  </label>
+
+  <label>
+    Vastagság (cm):
+    <input
+      type="number"
+      placeholder="Vastagság (cm)"
+      formControlName="thickness_cm"
+    />
+  </label>
+
+  <label>
+    Súly (kg):
+    <input type="number" placeholder="Súly (kg)" formControlName="weight_kg" />
+  </label>
+
+  <label>
+    Készlet (db):
+    <input type="number" placeholder="Készlet (db)" formControlName="stock" />
+  </label>
+
+  <label>
+    Raktár hely:
+    <input type="text" placeholder="Raktár hely" formControlName="location" />
+  </label>
+
+  <input type="file" (change)="onFileSelected($event)" />
+
+  <button type="submit" [disabled]="uploading">Feltöltés</button>
+
+  <div *ngIf="uploadSuccess" class="text-green-600">Sikeres feltöltés!</div>
+  <div *ngIf="errorMsg" class="text-red-600">{{ errorMsg }}</div>
+</form>

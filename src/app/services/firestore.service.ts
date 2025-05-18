@@ -7,9 +7,15 @@ import {
 } from '@angular/fire/firestore';
 import { collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+} from '@angular/fire/storage'; // FireStorage beemelése
 
 export interface Tile {
-  id: string;
+  id?: string;
   name: string;
   pricePerSqm: number;
   colorShade: string;
@@ -48,5 +54,28 @@ export class FirestoreService {
     return collectionData(this.tilesCollection, {
       idField: 'docId',
     }) as Observable<Tile[]>;
+  }
+
+  /**
+   * 🔼 Kép feltöltése Firebase Storage-be és URL mentése Firestore-ba
+   */
+  async uploadTileWithImage(tile: Omit<Tile, 'imageUrl'>, imageFile: File): Promise<void> {
+    const storage = getStorage();
+    const imageRef = ref(storage, `csempe-kepek/${imageFile.name}`);
+
+    // Kép feltöltése
+    await uploadBytes(imageRef, imageFile);
+
+    // URL lekérése
+    const downloadURL = await getDownloadURL(imageRef);
+
+    // Teljes tile objektum imageURL-lel
+    const fullTile: Tile = {
+      ...tile,
+      imageUrl: downloadURL,
+    };
+
+    // Mentés Firestore-ba
+    await this.addTile(fullTile);
   }
 }
