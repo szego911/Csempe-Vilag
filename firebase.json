@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/csempe-vilag", 
+    "public": "dist/csempe-vilag/browser",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {

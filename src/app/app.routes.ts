@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { CartComponent } from './pages/cart/cart.component';
 import { RegisterComponent } from './pages/cart/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
-import { HomeComponent } from './pages/home/home.component';
 import { ProfilComponent } from './pages/profil/profil.component';
 import { TileListComponent } from './pages/tileList/tile-list.component';
 import { AdminComponent } from './pages/admin/admin.component';
@@ -11,11 +10,11 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: HomeComponent,
+    component: TileListComponent,
   },
   {
     path: 'home',
-    component: HomeComponent,
+    component: TileListComponent,
   },
   {
     path: 'cart',
