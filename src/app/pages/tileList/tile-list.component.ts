@@ -4,12 +4,13 @@ import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/cart.service';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { TileFilterComponent } from '../../components/tile-filter/tile-filter.component';
 
 @Component({
   selector: 'app-tile-list',
   templateUrl: './tile-list.component.html',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatSnackBarModule],
+  imports: [CommonModule, FormsModule, MatSnackBarModule, TileFilterComponent],
 })
 export class TileListComponent implements OnInit {
   tiles: Tile[] = [];

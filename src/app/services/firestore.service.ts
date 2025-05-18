@@ -4,6 +4,12 @@ import {
   collection,
   addDoc,
   CollectionReference,
+  query,
+  where,
+  orderBy,
+  limit,
+  startAfter,
+  DocumentData,
 } from '@angular/fire/firestore';
 import { collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
@@ -59,7 +65,10 @@ export class FirestoreService {
   /**
    * 🔼 Kép feltöltése Firebase Storage-be és URL mentése Firestore-ba
    */
-  async uploadTileWithImage(tile: Omit<Tile, 'imageUrl'>, imageFile: File): Promise<void> {
+  async uploadTileWithImage(
+    tile: Omit<Tile, 'imageUrl'>,
+    imageFile: File
+  ): Promise<void> {
     const storage = getStorage();
     const imageRef = ref(storage, `csempe-kepek/${imageFile.name}`);
 
@@ -77,5 +86,69 @@ export class FirestoreService {
 
     // Mentés Firestore-ba
     await this.addTile(fullTile);
+  }
+
+  /**
+   * 1. Szürke csempék ár szerint növekvő sorrendben
+   */
+  getGreyTilesSortedByPrice(): Observable<Tile[]> {
+    const q = query(
+      this.tilesCollection,
+      where('colorShade', '==', 'Szürke'),
+      orderBy('pricePerSqm', 'asc')
+    );
+    return collectionData(q, { idField: 'docId' }) as Observable<Tile[]>;
+  }
+
+  /**
+   * 2. Beltéri, készleten lévő csempék (limit 10)
+   */
+  getIndoorAvailableTilesLimited(): Observable<Tile[]> {
+    const q = query(
+      this.tilesCollection,
+      where('recommendedUse', '==', 'Beltér'),
+      where('stock', '>', 0),
+      limit(10)
+    );
+    return collectionData(q, { idField: 'docId' }) as Observable<Tile[]>;
+  }
+
+  /**
+   * 3. Lapozás ár szerint (ár alapján léptetés)
+   */
+  getTilesAfterPrice(
+    lastPrice: number,
+    pageSize: number = 5
+  ): Observable<Tile[]> {
+    const q = query(
+      this.tilesCollection,
+      orderBy('pricePerSqm', 'asc'),
+      startAfter(lastPrice),
+      limit(pageSize)
+    );
+    return collectionData(q, { idField: 'docId' }) as Observable<Tile[]>;
+  }
+
+  /**
+   * 4. Matt felületű, szélesebb mint 30 cm, súly szerint csökkenő
+   */
+  getWideMattTilesByWeightDesc(): Observable<Tile[]> {
+    const q = query(
+      this.tilesCollection,
+      where('surface', '==', 'Matt'),
+      where('width_cm', '>', 30),
+      orderBy('weight_kg', 'desc')
+    );
+    return collectionData(q, { idField: 'docId' }) as Observable<Tile[]>;
+  }
+
+  searchTilesByName(name: string): Observable<Tile[]> {
+    const q = query(
+      this.tilesCollection,
+      orderBy('name'),
+      startAfter(name),
+      limit(10)
+    );
+    return collectionData(q, { idField: 'docId' }) as Observable<Tile[]>;
   }
 }

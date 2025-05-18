@@ -1,0 +1,33 @@
+<div class="p-4 flex flex-wrap gap-4 items-end">
+  <!-- Név kereső -->
+  <mat-form-field appearance="outline" class="w-64">
+    <mat-label>Keresés név alapján</mat-label>
+    <input matInput [(ngModel)]="searchName" (ngModelChange)="filterByName()" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-64">
+    <mat-label>Szín</mat-label>
+    <mat-select [(ngModel)]="selectedColor" (selectionChange)="filterByColor()">
+      <mat-option value="">Összes</mat-option>
+      <mat-option value="Fehér">Fehér</mat-option>
+      <mat-option value="Szürke">Szürke</mat-option>
+      <mat-option value="Bézs">Bézs</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-64">
+    <mat-label>Felület</mat-label>
+    <mat-select
+      [(ngModel)]="selectedSurface"
+      (selectionChange)="filterBySurface()"
+    >
+      <mat-option value="">Összes</mat-option>
+      <mat-option value="Matt">Matt</mat-option>
+      <mat-option value="Fényes">Fényes</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-stroked-button color="primary" (click)="resetFilters()">
+    Szűrők törlése
+  </button>
+</div>
