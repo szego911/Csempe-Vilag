@@ -3,12 +3,13 @@ import { FirestoreService, Tile } from '../../services/firestore.service';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/cart.service';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tile-list',
   templateUrl: './tile-list.component.html',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatSnackBarModule],
 })
 export class TileListComponent implements OnInit {
   tiles: Tile[] = [];
@@ -19,7 +20,8 @@ export class TileListComponent implements OnInit {
 
   constructor(
     private firestoreService: FirestoreService,
-    private cartService: CartService
+    private cartService: CartService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -42,14 +44,21 @@ export class TileListComponent implements OnInit {
 
     const tile = this.selectedTile;
     const quantity = this.selectedBoxes;
-
-    const totalArea = this.selectedBoxes * this.BOX_SIZE_M2;
+    const totalArea = quantity * this.BOX_SIZE_M2;
 
     this.cartService.addTileQuantity(tile, quantity);
 
-    alert(
-      `✅ ${this.selectedBoxes} doboz (${totalArea} m²) hozzáadva a kosárhoz!`
+    this.snackBar.open(
+      `✅ ${quantity} doboz (${totalArea} m²) hozzáadva a kosárhoz!`,
+      'OK',
+      {
+        duration: 3000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'center',
+        panelClass: ['snackbar-success'],
+      }
     );
+
     this.closeModal();
   }
 }

@@ -17,7 +17,6 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent implements OnInit {
   deferredPrompt: any = null;
-  showInstallButton = false;
 
   ngOnInit(): void {}
 }

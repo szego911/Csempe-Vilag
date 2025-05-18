@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CartService, CartItem } from '../../services/cart.service';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  imports: [CommonModule],
+  imports: [CommonModule, MatButtonModule],
 })
 export class CartComponent {
   cartItems: CartItem[] = [];
