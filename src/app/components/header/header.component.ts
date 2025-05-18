@@ -62,7 +62,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
       <button mat-button routerLink="/login">Bejelentkezés</button>
       <button mat-button routerLink="/profil">Profil</button>
       <button mat-button routerLink="/admin">Admin</button>
-      <button mat-stroked-button color="accent" routerLink="/cart">
+      <button
+        mat-stroked-button
+        color="accent"
+        matTooltip="Kosár megnyitása"
+        routerLink="/cart"
+      >
         {{ cartLabel() }}
       </button>
     </div>

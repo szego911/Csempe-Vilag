@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CartService, CartItem } from '../../services/cart.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { ArForintbanPipe } from "../../pipes/ar-forintban.pipe";
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  imports: [CommonModule, MatButtonModule],
+  imports: [CommonModule, MatButtonModule, ArForintbanPipe],
 })
 export class CartComponent {
   cartItems: CartItem[] = [];

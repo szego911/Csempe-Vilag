@@ -5,12 +5,14 @@ import { CartService } from '../../services/cart.service';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { TileFilterComponent } from '../../components/tile-filter/tile-filter.component';
+import { ArForintbanPipe } from "../../pipes/ar-forintban.pipe";
+import { KeszletSzovegPipe } from "../../pipes/keszlet-szine.pipe";
 
 @Component({
   selector: 'app-tile-list',
   templateUrl: './tile-list.component.html',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatSnackBarModule, TileFilterComponent],
+  imports: [CommonModule, FormsModule, MatSnackBarModule, TileFilterComponent, ArForintbanPipe, KeszletSzovegPipe],
 })
 export class TileListComponent implements OnInit {
   tiles: Tile[] = [];
